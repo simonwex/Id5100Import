@@ -1,18 +1,22 @@
 # Id5100Import
 
 Convert ID5100a ICF to bin:
-    ./icfToBin.py ID5100_Plano.icf > ID5100_Plano.bin
+```
+./icfToBin.py ID5100_Plano.icf > ID5100_Plano.bin
+```
 
 Convert all to text with memory address:
-    ./icfToBin.py ID5100_Test.icf | xxd -c 49 -g 1 | awk -F: '{x=strtonum("0x"$1); printf ("%05d: %05x: %s\n",x/49,x,$2);}'
+```
+./icfToBin.py ID5100_Test.icf | xxd -c 49 -g 1 | awk -F: '{x=strtonum("0x"$1); printf ("%05d: %05x: %s\n",x/49,x,$2);}'
 
-    ./icfToBin.py ID5100_Test.icf | xxd -c 49 -g 1 -b | awk -F: '{x=strtonum("0x"$1); printf ("%05d: %05x: %s\n",x/49,x,$2);}' | less -S
+./icfToBin.py ID5100_Test.icf | xxd -c 49 -g 1 -b | awk -F: '{x=strtonum("0x"$1); printf ("%05d: %05x: %s\n",x/49,x,$2);}' | less -S
+```
 
 ID-5100a ICF file format:
 
 Text file, binary encoded in hex:
 
-
+```
 Freqs 0 - 117.999, are not valid
 Freqs 118 - 136.999, only AM and AM-N modes are valid, along with TS 8.33k, 25k, and Auto
 Freqs 137 - 174, only FM, FM-N, and DV modes are valid, and TS 8.33 and Auto are not selectable
@@ -92,4 +96,4 @@ DTCS Polarity:2 0 - Both N
 (28-34) u8 your[7]      "Your"/"UR" (called callsign), 8 text chars, encoded 7 bits each (CQCQCQ), space padded, no NULL
 (35-41) u8 RPT1[7]      Repeater 1 callsign, 8 text chars, encoded 7 bits each, space padded, no NULL
 (42-48) u8 RPT2[7]      Repeater 2 callsign, 8 text chars, encoded 7 bits each, space padded, no NULL
-
+```
